@@ -1,0 +1,113 @@
+<div class="row justify-content-center m-0">
+    <div class="col-12 col-sm-12 col-md-7 contenedor mb-3">
+        <h1>Suscripcion de Actividad</h1>
+
+        <form class="formulario">
+            <div class="encabezado">
+                <h5>Consultar suscripciones del socio</h5>
+            </div>
+
+            <div class="contenedor-formulario p-3">
+                <div class="mb-3 verificar d-flex">
+                    <input type="text" class="form-control" name="verificar" placeholder="Ingrese dni del socio...">
+                    <div class="btn btn-secondary">Buscar</div>
+                </div>
+                <!-- <div>
+                    <label for="estado">Estado:</label>
+                    <input type="text" id="estado" disabled>
+                </div> -->
+                <div class="boton-formulario ">
+                    <button type="submit" class="btn btn-primary">Nueva Consulta</button>
+                </div>
+            </div>
+
+        </form>
+
+        <br>
+        <form class="formulario">
+            <div class="encabezado">
+                <h5>Datos del Socio</h5>
+            </div>
+            <div class="contenedor-formulario p-3">
+                <div class="mb-3">
+                    <label for="dni" class="form-label">DNI Socio</label>
+                    <input type="text" class="form-control" id="dni" placeholder="Ingrese el DNI">
+                </div>
+                <div class="mb-3">
+                    <label for="apellido" class="form-label">Apellido</label>
+                    <input type="text" class="form-control" id="apellido" placeholder="Ingrese el apellido">
+                </div>
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" placeholder="Ingrese el nombre">
+                </div>
+                <div class="mb-3">
+                    <label for="emailSocio" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="emailSocio" name="emailSocio" placeholder="Ingrese email">
+                </div>
+                <div class="mb-3">
+                    <label for="telefono" class="form-label">Telefono</label>
+                    <input type="email" class="form-control" id="telefono" placeholder="Ingrese el telefono">
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-12 col-sm-12 col-md-9 contenedor">
+        <h1>Actividades Disponibles</h1>
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Horario</th>
+                <th scope="col">Valor de la cuota</th>
+                <th scope="col">Responsable</th>
+                <th scope="col">Accion</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Basket</td>
+                <td>Lunes y Miercoles de 15 a 17 hs</td>
+                <td>$5000</td>
+                <td>Delgado Milton</td>
+                <td>
+                    <button class="btn btn-success">Suscribir</button>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Futbol</td>
+                <td>Martes y Viernes de 20 a 22 hs</td>
+                <td>$8000</td>
+                <td>Mercado Cesar</td>
+                <td>
+                    <button class="btn btn-success">Suscribir</button>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td colspan="1">Hockey</td>
+                <td>Miercoles y Jueves de  10 a 12 hs</td>
+                <td>$6000</td>
+                <td>Flores Antonela</td>
+                <td>
+                    <button class="btn btn-success">Suscribir</button>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td colspan="1">Voley</td>
+                <td>Martes y Viernes de 19 a 21</td>
+                <td>$5000</td>
+                <td>Andres Chaile</td>
+                <td>
+                    <button class="btn btn-success">Suscribir</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+</div>

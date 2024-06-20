@@ -1,0 +1,13 @@
+.logo{
+    width: 70px;
+}
+a{
+    color: rgb(255, 255, 255);
+}
+.activo{
+    color: #ffffff;
+    background-color: red;
+    border: solid 2px white;
+    border-radius: 20px;
+    text-decoration: underline 2px;
+}
