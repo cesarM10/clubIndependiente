@@ -9,44 +9,52 @@
 
             <div class="contenedor-formulario p-3">
                 <div class="mb-3 verificar d-flex">
-                    <input type="text" class="form-control" name="verificar" placeholder="Ingrese dni para verificar...">
-                    <div class="btn btn-secondary">Verificar</div>
+                    <input type="text" class="form-control" name="verificar" placeholder="Ingrese dni para verificar..." [(ngModel)]="dniBuscado">
+                    <div class="btn btn-secondary" (click)="buscarSocio()">Verificar</div>
                 </div>
                 <div>
                     <label for="estado">Estado:</label>
-                    <input type="text" id="estado" disabled value="DNI no registrado">
+                    <input type="text" id="estado" disabled value="{{estadoSocio}}">
                 </div>
             </div>
         </form>
 
         <br>
-        <form class="formulario">
+        <form class="formulario" *ngIf="(socio.dniSocio != '')">
             <div class="encabezado">
                 <h5>Registrar socio</h5>
             </div>
             <div class="contenedor-formulario p-3">
                 <div class="mb-3">
                     <label for="dni" class="form-label">DNI Socio</label>
-                    <input type="text" class="form-control" id="dni" placeholder="Ingrese el DNI" value="42123123" disabled>
+                    <input type="text" class="form-control" id="dni" name="dni" placeholder="Ingrese el DNI" value="{{socio.dniSocio}}" disabled [(ngModel)]="socio.dniSocio">
+                </div>
+                <div class="mb-3">
+                    <label for="nrosocio" class="form-label">Número de Socio</label>
+                    <input type="text" class="form-control" id="nrosocio" name="nrosocio" placeholder="Ingrese numero de socio" value="{{socio.dniSocio}}"  [(ngModel)]="socio.numeroSocio">
                 </div>
                 <div class="mb-3">
                     <label for="apellido" class="form-label">Apellido</label>
-                    <input type="text" class="form-control" id="apellido" placeholder="Ingrese el apellido">
+                    <input type="text" class="form-control" id="apellido"  name="apellido" placeholder="Ingrese el apellido" [(ngModel)]="socio.apellidoSocio">
                 </div>
                 <div class="mb-3">
                     <label for="nombre" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="nombre" placeholder="Ingrese el nombre">
+                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre" [(ngModel)]="socio.nombreSocio">
+                </div>
+                <div class="mb-3">
+                    <label for="fnacimiento" class="form-label">Fecha de Nacimiento</label>
+                    <input type="text" class="form-control" id="fnacimiento"  name="fnacimiento" placeholder="Ingrese la fecha de nacimiento"[(ngModel)]="socio.fechaNacimiento">
                 </div>
                 <div class="mb-3">
                     <label for="emailSocio" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="emailSocio" name="emailSocio" placeholder="Ingrese email">
+                    <input type="email" class="form-control" id="emailSocio" name="emailSocio" placeholder="Ingrese email" [(ngModel)]="socio.correoSocio">
                 </div>
                 <div class="mb-3">
                     <label for="telefono" class="form-label">Telefono</label>
-                    <input type="email" class="form-control" id="telefono" placeholder="ingrese el telefono">
+                    <input type="email" class="form-control" id="telefono" name="telefono" placeholder="ingrese el telefono" [(ngModel)]="socio.telefonoSocio">
                 </div>
                 <div class="boton-formulario ">
-                    <button type="submit" class="btn btn-primary">Registrar Socio</button>
+                    <button type="submit" class="btn btn-primary" (click)="crearSocio()">Registrar Socio</button>
                 </div>
             </div>
         </form>
