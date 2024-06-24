@@ -9,15 +9,15 @@
 
             <div class="contenedor-formulario p-3">
                 <div class="mb-3 verificar d-flex">
-                    <input type="text" class="form-control" name="verificar" placeholder="Ingrese dni del socio...">
-                    <div class="btn btn-secondary">Buscar</div>
+                    <input type="text" class="form-control" name="verificar" placeholder="Ingrese dni del socio..." [(ngModel)]="dniBuscado">
+                    <div class="btn btn-light" (click)="buscarSocio()">Buscar</div>
                 </div>
-                <!-- <div>
+                <div class="mb-3">
                     <label for="estado">Estado:</label>
-                    <input type="text" id="estado" disabled>
-                </div> -->
-                <div class="boton-formulario ">
-                    <button type="submit" class="btn btn-primary">Nueva Consulta</button>
+                    <input type="text" id="estado" value="{{estado}}" readonly>
+                </div>
+                <div class="boton-formulario mb-3">
+                    <button type="submit" class="btn btn-primary" (click)="limpiar()">Nueva Consulta</button>
                 </div>
             </div>
 
@@ -31,26 +31,55 @@
             <div class="contenedor-formulario p-3">
                 <div class="mb-3">
                     <label for="dni" class="form-label">DNI Socio</label>
-                    <input type="text" class="form-control" id="dni" placeholder="Ingrese el DNI">
+                    <input type="text" class="form-control" id="dni" placeholder="Ingrese el DNI" name="dni" [(ngModel)]="suscripcion.socio.dniSocio" readonly>
                 </div>
                 <div class="mb-3">
                     <label for="apellido" class="form-label">Apellido</label>
-                    <input type="text" class="form-control" id="apellido" placeholder="Ingrese el apellido">
+                    <input type="text" class="form-control" id="apellido" placeholder="Ingrese el apellido" name="apellido" [(ngModel)]="suscripcion.socio.apellidoSocio" readonly>
                 </div>
                 <div class="mb-3">
                     <label for="nombre" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="nombre" placeholder="Ingrese el nombre">
+                    <input type="text" class="form-control" id="nombre" placeholder="Ingrese el nombre" name="nombre" [(ngModel)]="suscripcion.socio.nombreSocio" readonly>
                 </div>
                 <div class="mb-3">
                     <label for="emailSocio" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="emailSocio" name="emailSocio" placeholder="Ingrese email">
+                    <input type="email" class="form-control" id="emailSocio" name="emailSocio" placeholder="Ingrese email" [(ngModel)]="suscripcion.socio.correoSocio" readonly>
                 </div>
                 <div class="mb-3">
                     <label for="telefono" class="form-label">Telefono</label>
-                    <input type="email" class="form-control" id="telefono" placeholder="Ingrese el telefono">
+                    <input type="email" class="form-control" id="telefono" placeholder="Ingrese el telefono" name="telefono" [(ngModel)]="suscripcion.socio.telefonoSocio" readonly>
                 </div>
             </div>
         </form>
+    </div>
+
+
+    <div class="col-12 col-sm-12 col-md-9 contenedor">
+        <h1>Actividades Suscriptas</h1>
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Horario</th>
+                <th scope="col">Valor de la cuota</th>
+                <th scope="col">Responsable</th>
+                <th scope="col">Accion</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let sus of suscripciones">
+                <th scope="row">-</th>
+                <td>{{sus.actividad.nombreActividad}}</td>
+                <td>{{sus.actividad.horarioActividad}}</td>
+                <td>{{sus.actividad.valorCuotaActividad}}</td>
+                <td>{{sus.actividad.responsableActividad}}</td>
+                <td>
+                    <button class="btn btn-danger">Quitar</button>
+                </td>
+              </tr>              
+            </tbody>
+          </table>
     </div>
 
     <div class="col-12 col-sm-12 col-md-9 contenedor">
@@ -67,44 +96,14 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Basket</td>
-                <td>Lunes y Miercoles de 15 a 17 hs</td>
-                <td>$5000</td>
-                <td>Delgado Milton</td>
+              <tr *ngFor="let act of actividades">
+                <th scope="row">-</th>
+                <td>{{act.nombreActividad}}</td>
+                <td>{{act.horarioActividad}}</td>
+                <td>{{act.valorCuotaActividad}}</td>
+                <td>{{act.responsableActividad}}</td>
                 <td>
-                    <button class="btn btn-success">Suscribir</button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Futbol</td>
-                <td>Martes y Viernes de 20 a 22 hs</td>
-                <td>$8000</td>
-                <td>Mercado Cesar</td>
-                <td>
-                    <button class="btn btn-success">Suscribir</button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td colspan="1">Hockey</td>
-                <td>Miercoles y Jueves de  10 a 12 hs</td>
-                <td>$6000</td>
-                <td>Flores Antonela</td>
-                <td>
-                    <button class="btn btn-success">Suscribir</button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td colspan="1">Voley</td>
-                <td>Martes y Viernes de 19 a 21</td>
-                <td>$5000</td>
-                <td>Andres Chaile</td>
-                <td>
-                    <button class="btn btn-success">Suscribir</button>
+                    <button class="btn btn-success" (click)="suscribirActividad(act._id)">Suscribir</button>
                 </td>
               </tr>
             </tbody>

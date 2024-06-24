@@ -16,7 +16,7 @@ export class ActividadService {
 
       })
     }
-    return this.http.get('http://localhost:3000/api//actividad/', httpOption);
+    return this.http.get('http://localhost:3000/api/actividad/', httpOption);
   }
 
   postActividad(actividad: Actividad): Observable<any> {
