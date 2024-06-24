@@ -43,6 +43,7 @@ export class RegistroSocioComponent {
         console.log(data);
         this.dniBuscado = "";
         this.socio = new Socio();
+        alert("Se registró el nuevo socio exitosamente.");
       },
       error => {
         console.log(error);
