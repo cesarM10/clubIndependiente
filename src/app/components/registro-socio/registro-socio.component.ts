@@ -41,7 +41,8 @@ export class RegistroSocioComponent {
     this.socioService.postSocio(this.socio).subscribe(
       data => {
         console.log(data);
-        
+        this.dniBuscado = "";
+        this.socio = new Socio();
       },
       error => {
         console.log(error);
