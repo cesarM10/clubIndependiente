@@ -16,36 +16,43 @@ export class SocioService {
       headers: new HttpHeaders({
 
       })
-  }
-  return this.http.get('http://localhost:3000/api/socio', httpOption);
+    }
+    return this.http.get('http://localhost:3000/api/socio', httpOption);
   }
   postSocio(socio: Socio): Observable<any> {
     let httpOption = {
       headers: new HttpHeaders({
         'Content-type': 'application/json'
       })
+    }
+    return this.http.post('http://localhost:3000/api/socio/', socio, httpOption);
   }
-  return this.http.post('http://localhost:3000/api/socio/', socio, httpOption);
-}
 
-getSocioByDni(dniSocio: string): Observable<any> {
-  let httpOption = {
-    headers: new HttpHeaders({
+  getSocioByDni(dniSocio: string): Observable<any> {
+    let httpOption = {
+      headers: new HttpHeaders({
 
-    })
+      })
+    }
+    return this.http.get('http://localhost:3000/api/socio/' + dniSocio, httpOption);
   }
-  return this.http.get('http://localhost:3000/api/socio/'+ dniSocio, httpOption);
-}
 
-deleteSocio(idSocio: string): Observable<any> {
-  let httpOption = {
-    headers: new HttpHeaders({
-      'Content-type': 'application/json'
-    })
-}
-return this.http.delete('http://localhost:3000/api/socio/'+idSocio,httpOption);
-}
+  deleteSocio(idSocio: string): Observable<any> {
+    let httpOption = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json'
+      })
+    }
+    return this.http.delete('http://localhost:3000/api/socio/' + idSocio, httpOption);
+  }
 
+  getUltimo(): Observable<any> {
+    let httpOption = {
+      headers: new HttpHeaders({
 
+      })
+    }
+    return this.http.get('http://localhost:3000/api/socio/ultimo', httpOption);
+  }
 
 }

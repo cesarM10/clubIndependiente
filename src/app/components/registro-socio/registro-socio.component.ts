@@ -3,6 +3,7 @@ import { SocioService } from '../../services/socio.service';
 import { Socio } from '../../models/socio';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { empty } from 'rxjs';
 
 @Component({
   selector: 'app-registro-socio',
@@ -16,6 +17,7 @@ export class RegistroSocioComponent {
   socio: Socio = new Socio();
   dniBuscado: string = "";
   estadoSocio: string = "";
+  siguienteId: string = "";
 
 
   constructor(private socioService: SocioService) {
@@ -27,17 +29,8 @@ export class RegistroSocioComponent {
 
 
   //probado.
-  crearSocio() {
-    // this.socio.numeroSocio= "1";
-    // this.socio.dniSocio= "40123123";
-    // this.socio.nombreSocio= "Juan";
-    // this.socio.apellidoSocio= "Lopez";
-    // this.socio.fechaNacimiento= "2000-01-01";
-    // this.socio.correoSocio= "correo";
-    // this.socio.telefonoSocio= 123456789;
-    // this.socio = new Socio;
-    console.log(this.socio);
-
+  registrarSocio() {
+    
     this.socioService.postSocio(this.socio).subscribe(
       data => {
         console.log(data);
@@ -52,7 +45,7 @@ export class RegistroSocioComponent {
   }
 
   //Buscar socio.
-  buscarSocio() {
+  verificarSocio() {
     if (this.dniBuscado == "") {
       alert("Ingrese el numero de DNI.");
     } else {
@@ -67,6 +60,7 @@ export class RegistroSocioComponent {
           if (vsocio.dniSocio == "") {
             this.estadoSocio = "DNI no registrado";
             this.socio.dniSocio = this.dniBuscado;
+            
           } else {
             if (vsocio.dniSocio == this.dniBuscado) {
               this.estadoSocio = "DNI de socio registrado";
@@ -79,6 +73,28 @@ export class RegistroSocioComponent {
         }
       )
     }
+  }
+
+  generarNrosocio(){
+    let siguienteId: string = "";
+    this.socioService.getUltimo().subscribe(
+      data => {
+        console.log(data);
+        if (data == "") {
+          console.log('base de datos vacia');
+          this.socio.numeroSocio = "1";
+          console.log(this.socio);
+        }else{
+          siguienteId = (parseInt(data.numeroSocio) + 1).toString();
+          console.log("Siguiente numero de socio: ",siguienteId);
+          this.socio.numeroSocio = siguienteId;
+        }        
+      },
+      error => {
+        console.log(error);
+      }
+
+    )
   }
 
   limpiar() {

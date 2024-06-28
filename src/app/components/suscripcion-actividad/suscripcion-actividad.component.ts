@@ -41,7 +41,7 @@ export class SuscripcionActividadComponent {
 
     this.socio = new Socio();
 
-    this.obtenerActividades();
+    this.listarActividades();
   }
 
   buscarSocio() {
@@ -104,7 +104,7 @@ export class SuscripcionActividadComponent {
   }
 
 
-  obtenerActividades() {
+  listarActividades() {
     this.actividadService.getActividades().subscribe(
       result => {
         console.log(result);
@@ -121,7 +121,7 @@ export class SuscripcionActividadComponent {
     )
   }
 
-  suscribirActividad() {
+  registrarSuscripcion() {
     //Arreglar esto para que reciba el socio y la actividad
     const hoy = new Date();
     const fechaSus = hoy.toISOString().split('T')[0];
