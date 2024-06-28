@@ -14,7 +14,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="suscribirActividad()">Confirmar suscripcion</button>
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="registrarSuscripcion()">Confirmar suscripcion</button>
                 </div>
             </div>
         </div>
@@ -74,27 +74,32 @@
             <div class="contenedor-formulario p-3">
                 <div class="mb-3">
                     <label for="dni" class="form-label">DNI Socio</label>
-                    <input type="text" class="form-control" id="dni" placeholder="Ingrese el DNI" name="dni"
+                    <input type="text" class="form-control" id="dni"  name="dni"
                         [(ngModel)]="suscripcion.socio.dniSocio" readonly>
                 </div>
                 <div class="mb-3">
+                    <label for="nrosocio" class="form-label">Número de Socio</label>
+                    <input type="text" class="form-control" id="nrosocio" name="nrosocio"
+                       [(ngModel)]="suscripcion.socio.numeroSocio" readonly>
+                </div>
+                <div class="mb-3">
                     <label for="apellido" class="form-label">Apellido</label>
-                    <input type="text" class="form-control" id="apellido" placeholder="Ingrese el apellido"
+                    <input type="text" class="form-control" id="apellido" 
                         name="apellido" [(ngModel)]="suscripcion.socio.apellidoSocio" readonly>
                 </div>
                 <div class="mb-3">
                     <label for="nombre" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="nombre" placeholder="Ingrese el nombre" name="nombre"
+                    <input type="text" class="form-control" id="nombre" name="nombre"
                         [(ngModel)]="suscripcion.socio.nombreSocio" readonly>
                 </div>
                 <div class="mb-3">
                     <label for="emailSocio" class="form-label">Email</label>
                     <input type="email" class="form-control" id="emailSocio" name="emailSocio"
-                        placeholder="Ingrese email" [(ngModel)]="suscripcion.socio.correoSocio" readonly>
+                         [(ngModel)]="suscripcion.socio.correoSocio" readonly>
                 </div>
                 <div class="mb-3">
                     <label for="telefono" class="form-label">Telefono</label>
-                    <input type="email" class="form-control" id="telefono" placeholder="Ingrese el telefono"
+                    <input type="email" class="form-control" id="telefono" 
                         name="telefono" [(ngModel)]="suscripcion.socio.telefonoSocio" readonly>
                 </div>
             </div>

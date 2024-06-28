@@ -14,7 +14,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
                     <button type="button" class="btn btn-success" data-bs-dismiss="modal"
-                    (click)="crearSocio()">Confirmar registro</button>
+                    (click)="registrarSocio()">Confirmar registro</button>
                 </div>
             </div>
         </div>
@@ -32,7 +32,7 @@
                 <div class="mb-3 verificar d-flex">
                     <input type="text" class="form-control" name="verificar" placeholder="Ingrese dni para verificar..."
                         [(ngModel)]="dniBuscado">
-                    <div class="btn btn-secondary" (click)="buscarSocio()">Verificar</div>
+                    <div class="btn btn-secondary" (click)="verificarSocio()">Verificar</div>
                 </div>
                 <div class="mb-3">
                     <label for="estado">Estado:</label>
@@ -55,11 +55,7 @@
                     <input type="text" class="form-control" id="dni" name="dni" placeholder="Ingrese el DNI"
                         value="{{socio.dniSocio}}" disabled [(ngModel)]="socio.dniSocio">
                 </div>
-                <div class="mb-3">
-                    <label for="nrosocio" class="form-label">Número de Socio</label>
-                    <input type="text" class="form-control" id="nrosocio" name="nrosocio"
-                        placeholder="Ingrese numero de socio" [(ngModel)]="socio.numeroSocio">
-                </div>
+                
                 <div class="mb-3">
                     <label for="apellido" class="form-label">Apellido</label>
                     <input type="text" class="form-control" id="apellido" name="apellido"
@@ -86,7 +82,7 @@
                         placeholder="ingrese el telefono" [(ngModel)]="socio.telefonoSocio">
                 </div>
                 <div class="boton-formulario" *ngIf="socio.apellidoSocio != '' && socio.nombreSocio != '' && socio.fechaNacimiento != '' && socio.correoSocio != '' && socio.telefonoSocio > 0 && socio.telefonoSocio != null">
-                    <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdropRegistroSocio">Registrar Socio</button>
+                    <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdropRegistroSocio" (click)="generarNrosocio()">Registrar Socio</button>
                 </div>
             </div>
         </form>

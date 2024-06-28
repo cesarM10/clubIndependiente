@@ -40,15 +40,5 @@ export class RegistroActividadComponent {
     )
 
   }
-  // validarFormularioActividad() {
-  //   if (this.actividad.nombreActividad == "" || this.actividad.responsableActividad == "" || this.actividad.horarioActividad == "" || this.actividad.valorCuotaActividad == 0) {
-  //     alert("Todos los campos son obligatorios");
-  //     return false;
-  //   }
-  //   return true;
-  // }
-
-
-
 
 }
