@@ -15,12 +15,12 @@ export class RegistroActividadComponent {
 
   actividad: Actividad = new Actividad();
 
-  constructor(private actividadService: ActividadService) { 
+  constructor(private actividadService: ActividadService) {
     // this.crearActividad();
   }
 
 
-  crearActividad(){
+  crearActividad() {
     // this.actividad.nombreActividad= "Hockey";
     // this.actividad.responsableActividad= "Antonela Flores";
     // this.actividad.horarioActividad= "Miercoles y Jueves de  10 a 12 hs"
@@ -32,13 +32,21 @@ export class RegistroActividadComponent {
         console.log(data);
         this.actividad = new Actividad();
         alert("Se registró la actividad");
-        
+
       },
       error => {
         console.log(error);
       }
     )
+
   }
+  // validarFormularioActividad() {
+  //   if (this.actividad.nombreActividad == "" || this.actividad.responsableActividad == "" || this.actividad.horarioActividad == "" || this.actividad.valorCuotaActividad == 0) {
+  //     alert("Todos los campos son obligatorios");
+  //     return false;
+  //   }
+  //   return true;
+  // }
 
 
 

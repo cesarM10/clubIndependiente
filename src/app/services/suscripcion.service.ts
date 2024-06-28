@@ -28,4 +28,13 @@ export class SuscripcionService {
     }
     return this.http.post('http://localhost:3000/api/suscripcion/', suscripcion, httpOption);
   }
+
+  deleteSuscripcion(idSuscripcion: string): Observable<any>{
+    let httpOption = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    }
+    return this.http.delete('http://localhost:3000/api/suscripcion/' + idSuscripcion, httpOption);
+  }
 }

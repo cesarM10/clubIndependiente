@@ -26,9 +26,11 @@ export class SuscripcionActividadComponent {
   actividades: Array<Actividad> = [];
   actividad: Actividad = new Actividad();
 
+  idSuscripcionEliminar: string = "";
+
   constructor(private suscripcionService: SuscripcionService,
-              private actividadService: ActividadService,
-              private socioService: SocioService) {
+    private actividadService: ActividadService,
+    private socioService: SocioService) {
     this.dniBuscado = "";
     this.suscripcion = new Suscripcion();
     this.suscripciones = [];
@@ -42,31 +44,35 @@ export class SuscripcionActividadComponent {
     this.obtenerActividades();
   }
 
-  buscarSocio(){
-    this.socioService.getSocioByDni(this.dniBuscado).subscribe(
-      data => {
-        console.log(data);
-        let vsocio = new Socio();
-        data.forEach((soc : any) =>{
-          Object.assign(vsocio, soc);
-        
-        });
-        if (vsocio.dniSocio==""){
-          this.estado = "DNI no registrado";
-          this.socio.dniSocio = this.dniBuscado;
-        }else{
-          if(vsocio.dniSocio==this.dniBuscado){
-            this.estado = "Socio registrado";
-            this.socio = vsocio;
-            this.suscripcion.socio = this.socio;
-            this.obtenerSuscripciones();
+  buscarSocio() {
+    if (this.dniBuscado == "") {
+      alert("Ingrese el dni");
+    } else {
+      this.socioService.getSocioByDni(this.dniBuscado).subscribe(
+        data => {
+          console.log(data);
+          let vsocio = new Socio();
+          data.forEach((soc: any) => {
+            Object.assign(vsocio, soc);
+
+          });
+          if (vsocio.dniSocio == "") {
+            this.estado = "DNI no registrado";
+            this.socio.dniSocio = this.dniBuscado;
+          } else {
+            if (vsocio.dniSocio == this.dniBuscado) {
+              this.estado = "Socio registrado";
+              this.socio = vsocio;
+              this.suscripcion.socio = this.socio;
+              this.obtenerSuscripciones();
+            }
           }
+        },
+        error => {
+          console.log(error);
         }
-      },
-      error => {
-        console.log(error);
-      }
-    )
+      )
+    }
   }
 
   obtenerSuscripciones() {
@@ -97,7 +103,7 @@ export class SuscripcionActividadComponent {
     )
   }
 
-  
+
   obtenerActividades() {
     this.actividadService.getActividades().subscribe(
       result => {
@@ -115,7 +121,7 @@ export class SuscripcionActividadComponent {
     )
   }
 
-  suscribirActividad(idActividad: string) {
+  suscribirActividad() {
     //Arreglar esto para que reciba el socio y la actividad
     const hoy = new Date();
     const fechaSus = hoy.toISOString().split('T')[0];
@@ -124,20 +130,43 @@ export class SuscripcionActividadComponent {
     const fechaConUnMes = new Date(hoy.setMonth(hoy.getMonth() + 1));
     const fechaVto = fechaConUnMes.toISOString().split('T')[0];
     console.log(fechaVto);
-    
+
     this.suscripcion.fechaSus = fechaSus;
     this.suscripcion.fechaVtoSus = fechaVto;
-    this.suscripcion.actividad._id = idActividad;
+
     this.suscripcionService.createSuscripcion(this.suscripcion).subscribe(
       result => {
         console.log(result);
         alert("Suscripcion registrada correctamente.")
-        this.limpiar();
+        this.obtenerSuscripciones();
       },
       error => {
         console.log("Algo paso: ", error);
       }
     )
+  }
+
+  asignarIdActividad(idActividad: string) {
+    this.suscripcion.actividad._id = idActividad;
+    console.log(this.suscripcion.actividad._id);
+  }
+
+  eliminarSuscripcion() {
+    this.suscripcionService.deleteSuscripcion(this.idSuscripcionEliminar).subscribe(
+      result => {
+        console.log(result);
+        alert("Suscripcion eliminada correctamente.")
+        this.obtenerSuscripciones();
+      },
+      error => {
+        console.log("Algo paso: ", error);
+      }
+    )
+  }
+
+  confirmarEliminacion(idSuscripcion: string){
+    this.idSuscripcionEliminar = idSuscripcion;
+    console.log(this.idSuscripcionEliminar);
   }
 
   limpiar() {

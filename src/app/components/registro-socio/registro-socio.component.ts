@@ -18,7 +18,7 @@ export class RegistroSocioComponent {
   estadoSocio: string = "";
 
 
-  constructor(private socioService : SocioService) { 
+  constructor(private socioService: SocioService) {
     this.socio = new Socio();
     // this.crearSocio();
     // this.buscarSocio();
@@ -27,7 +27,7 @@ export class RegistroSocioComponent {
 
 
   //probado.
-  crearSocio(){
+  crearSocio() {
     // this.socio.numeroSocio= "1";
     // this.socio.dniSocio= "40123123";
     // this.socio.nombreSocio= "Juan";
@@ -52,33 +52,38 @@ export class RegistroSocioComponent {
   }
 
   //Buscar socio.
-  buscarSocio(){
-    this.socioService.getSocioByDni(this.dniBuscado).subscribe(
-      data => {
-        console.log(data);
-        let vsocio = new Socio();
-        data.forEach((soc : any) =>{
-          Object.assign(vsocio, soc);
-        
-        });
-        if (vsocio.dniSocio==""){
-          this.estadoSocio = "DNI no registrado";
-          this.socio.dniSocio = this.dniBuscado;
-        }else{
-          if(vsocio.dniSocio==this.dniBuscado){
-            this.estadoSocio = "DNI de socio registrado";
-            this.socio.dniSocio = "";
-          }
-        }
-      },
-      error => {
-        console.log(error);
-      }
-    )
-      
-  }
- 
-  
-  
+  buscarSocio() {
+    if (this.dniBuscado == "") {
+      alert("Ingrese el numero de DNI.");
+    } else {
+      this.socioService.getSocioByDni(this.dniBuscado).subscribe(
+        data => {
+          console.log(data);
+          let vsocio = new Socio();
+          data.forEach((soc: any) => {
+            Object.assign(vsocio, soc);
 
+          });
+          if (vsocio.dniSocio == "") {
+            this.estadoSocio = "DNI no registrado";
+            this.socio.dniSocio = this.dniBuscado;
+          } else {
+            if (vsocio.dniSocio == this.dniBuscado) {
+              this.estadoSocio = "DNI de socio registrado";
+              this.socio.dniSocio = "";
+            }
+          }
+        },
+        error => {
+          console.log(error);
+        }
+      )
+    }
+  }
+
+  limpiar() {
+    this.dniBuscado = "";
+    this.socio = new Socio();
+    this.estadoSocio = "";
+  }
 }

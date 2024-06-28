@@ -1,4 +1,25 @@
 <div class="row justify-content-center m-0">
+    <!-- Modal Registro Actividad-->
+    <div class="modal fade" id="staticBackdropRegistroActividad" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog ">
+            <div class="modal-content bg-secondary">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Confirmación</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <span style="color: white;">¿Desea registrar una nueva actividad?</span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal"
+                    (click)="crearActividad()">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="col-12 col-sm-12 col-md-7 contenedor">
         <h1>Registro de Nueva Actividad</h1>
 
@@ -23,8 +44,8 @@
                     <label for="cuota" class="form-label">Valor de la cuota</label>
                     <input type="number" class="form-control" id="cuota" name="cuota" placeholder="Ingrese el valor de la cuota" [(ngModel)]="actividad.valorCuotaActividad">
                 </div>
-                <div class="boton-formulario">
-                    <button type="submit" class="btn btn-primary" (click)="crearActividad()">Registrar Actividad</button>
+                <div class="boton-formulario" *ngIf="actividad.nombreActividad != '' && actividad.horarioActividad != '' && actividad.responsableActividad != '' && actividad.valorCuotaActividad > 0 && actividad.valorCuotaActividad != null">
+                    <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdropRegistroActividad">Registrar Actividad</button>
                 </div>
             </div>
         </form>

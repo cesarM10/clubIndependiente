@@ -1,4 +1,25 @@
 <div class="row justify-content-center m-0">
+    <!-- Modal Registro Socio-->
+    <div class="modal fade" id="staticBackdropRegistroSocio" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog ">
+            <div class="modal-content bg-secondary">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Confirmación</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <span style="color: white;">¿Desea registrar un nuevo socio?</span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal"
+                    (click)="crearSocio()">Confirmar registro</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="col-12 col-sm-12 col-md-7 contenedor">
         <h1>Registro de Nuevo Socio</h1>
 
@@ -9,12 +30,16 @@
 
             <div class="contenedor-formulario p-3">
                 <div class="mb-3 verificar d-flex">
-                    <input type="text" class="form-control" name="verificar" placeholder="Ingrese dni para verificar..." [(ngModel)]="dniBuscado">
+                    <input type="text" class="form-control" name="verificar" placeholder="Ingrese dni para verificar..."
+                        [(ngModel)]="dniBuscado">
                     <div class="btn btn-secondary" (click)="buscarSocio()">Verificar</div>
                 </div>
-                <div>
+                <div class="mb-3">
                     <label for="estado">Estado:</label>
                     <input type="text" id="estado" disabled value="{{estadoSocio}}">
+                </div>
+                <div class="boton-formulario mb-3">
+                    <button type="submit" class="btn btn-primary" (click)="limpiar()">Nueva Consulta</button>
                 </div>
             </div>
         </form>
@@ -27,34 +52,41 @@
             <div class="contenedor-formulario p-3">
                 <div class="mb-3">
                     <label for="dni" class="form-label">DNI Socio</label>
-                    <input type="text" class="form-control" id="dni" name="dni" placeholder="Ingrese el DNI" value="{{socio.dniSocio}}" disabled [(ngModel)]="socio.dniSocio">
+                    <input type="text" class="form-control" id="dni" name="dni" placeholder="Ingrese el DNI"
+                        value="{{socio.dniSocio}}" disabled [(ngModel)]="socio.dniSocio">
                 </div>
                 <div class="mb-3">
                     <label for="nrosocio" class="form-label">Número de Socio</label>
-                    <input type="text" class="form-control" id="nrosocio" name="nrosocio" placeholder="Ingrese numero de socio" [(ngModel)]="socio.numeroSocio">
+                    <input type="text" class="form-control" id="nrosocio" name="nrosocio"
+                        placeholder="Ingrese numero de socio" [(ngModel)]="socio.numeroSocio">
                 </div>
                 <div class="mb-3">
                     <label for="apellido" class="form-label">Apellido</label>
-                    <input type="text" class="form-control" id="apellido"  name="apellido" placeholder="Ingrese el apellido" [(ngModel)]="socio.apellidoSocio">
+                    <input type="text" class="form-control" id="apellido" name="apellido"
+                        placeholder="Ingrese el apellido" [(ngModel)]="socio.apellidoSocio">
                 </div>
                 <div class="mb-3">
                     <label for="nombre" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre" [(ngModel)]="socio.nombreSocio">
+                    <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre"
+                        [(ngModel)]="socio.nombreSocio">
                 </div>
                 <div class="mb-3">
                     <label for="fnacimiento" class="form-label">Fecha de Nacimiento</label>
-                    <input type="text" class="form-control" id="fnacimiento"  name="fnacimiento" placeholder="Ingrese la fecha de nacimiento"[(ngModel)]="socio.fechaNacimiento">
+                    <input type="text" class="form-control" id="fnacimiento" name="fnacimiento"
+                        placeholder="Ingrese la fecha de nacimiento" [(ngModel)]="socio.fechaNacimiento">
                 </div>
                 <div class="mb-3">
                     <label for="emailSocio" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="emailSocio" name="emailSocio" placeholder="Ingrese email" [(ngModel)]="socio.correoSocio">
+                    <input type="email" class="form-control" id="emailSocio" name="emailSocio"
+                        placeholder="Ingrese email" [(ngModel)]="socio.correoSocio">
                 </div>
                 <div class="mb-3">
                     <label for="telefono" class="form-label">Telefono</label>
-                    <input type="email" class="form-control" id="telefono" name="telefono" placeholder="ingrese el telefono" [(ngModel)]="socio.telefonoSocio">
+                    <input type="email" class="form-control" id="telefono" name="telefono"
+                        placeholder="ingrese el telefono" [(ngModel)]="socio.telefonoSocio">
                 </div>
-                <div class="boton-formulario ">
-                    <button type="submit" class="btn btn-primary" (click)="crearSocio()">Registrar Socio</button>
+                <div class="boton-formulario" *ngIf="socio.apellidoSocio != '' && socio.nombreSocio != '' && socio.fechaNacimiento != '' && socio.correoSocio != '' && socio.telefonoSocio > 0 && socio.telefonoSocio != null">
+                    <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdropRegistroSocio">Registrar Socio</button>
                 </div>
             </div>
         </form>
