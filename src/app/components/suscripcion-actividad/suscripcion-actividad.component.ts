@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { SuscripcionService } from '../../services/suscripcion.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -7,6 +7,7 @@ import { ActividadService } from '../../services/actividad.service';
 import { Actividad } from '../../models/actividad';
 import { SocioService } from '../../services/socio.service';
 import { Socio } from '../../models/socio';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-suscripcion-actividad',
@@ -28,6 +29,8 @@ export class SuscripcionActividadComponent {
 
   idSuscripcionEliminar: string = "";
 
+  toastSrvc = inject(ToastrService);
+
   constructor(private suscripcionService: SuscripcionService,
     private actividadService: ActividadService,
     private socioService: SocioService) {
@@ -46,7 +49,7 @@ export class SuscripcionActividadComponent {
 
   buscarSocio() {
     if (this.dniBuscado == "") {
-      alert("Ingrese el dni");
+      this.toastSrvc.info("Ingrese el numero de DNI.")
     } else {
       this.socioService.getSocioByDni(this.dniBuscado).subscribe(
         data => {
@@ -122,7 +125,6 @@ export class SuscripcionActividadComponent {
   }
 
   registrarSuscripcion() {
-    //Arreglar esto para que reciba el socio y la actividad
     const hoy = new Date();
     const fechaSus = hoy.toISOString().split('T')[0];
     console.log(fechaSus);
@@ -137,7 +139,7 @@ export class SuscripcionActividadComponent {
     this.suscripcionService.createSuscripcion(this.suscripcion).subscribe(
       result => {
         console.log(result);
-        alert("Suscripcion registrada correctamente.")
+        this.toastSrvc.success("Suscripcion registrada correctamente.")
         this.obtenerSuscripciones();
       },
       error => {
@@ -155,7 +157,7 @@ export class SuscripcionActividadComponent {
     this.suscripcionService.deleteSuscripcion(this.idSuscripcionEliminar).subscribe(
       result => {
         console.log(result);
-        alert("Suscripcion eliminada correctamente.")
+        this.toastSrvc.warning("Suscripcion eliminada correctamente.")
         this.obtenerSuscripciones();
       },
       error => {

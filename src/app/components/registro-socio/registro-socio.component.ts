@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { SocioService } from '../../services/socio.service';
 import { Socio } from '../../models/socio';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { empty } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-registro-socio',
@@ -19,6 +19,7 @@ export class RegistroSocioComponent {
   estadoSocio: string = "";
   siguienteId: string = "";
 
+  toastSrvc = inject(ToastrService);
 
   constructor(private socioService: SocioService) {
     this.socio = new Socio();
@@ -36,7 +37,8 @@ export class RegistroSocioComponent {
         console.log(data);
         this.dniBuscado = "";
         this.socio = new Socio();
-        alert("Se registró el nuevo socio exitosamente.");
+        this.toastSrvc.success('Se registró el nuevo socio exitosamente.');
+        // alert("Se registró el nuevo socio exitosamente.");
       },
       error => {
         console.log(error);
