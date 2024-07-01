@@ -49,7 +49,7 @@ export class RegistroSocioComponent {
   //Buscar socio.
   verificarSocio() {
     if (this.dniBuscado == "") {
-      alert("Ingrese el numero de DNI.");
+      this.toastSrvc.info('Ingrese el numero de DNI.');
     } else {
       this.socioService.getSocioByDni(this.dniBuscado).subscribe(
         data => {
